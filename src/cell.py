@@ -10,7 +10,7 @@ class Cell:
 
 	def draw(self, surface:pygame.surface.Surface):
 		if self.__state == 1:
-			pygame.draw.circle(surface, "red", (self.__x + TILE_SIZE // 2, self.__y + TILE_SIZE // 2), TILE_SIZE // 3, 10)
+			pygame.draw.circle(surface, "red", (self.__x + TILE_SIZE // 2, self.__y + TILE_SIZE // 2), TILE_SIZE // 2.5, 10)
 		if self.__state == 0:
 			pygame.draw.line(surface, "blue", 
 				(self.__x + TILE_SIZE // 10, self.__y + TILE_SIZE // 10), 

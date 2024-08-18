@@ -5,12 +5,13 @@ WIDTH = 700
 HEIGHT = 700
 SCREEN = pygame.display.set_mode((WIDTH, HEIGHT))
 
-TILE_SIZE = 140
+TILE_SIZE = 70
+NUM_CELLS_FOR_WIN = 5
 
 GAME_TITLE = 'Tic Tac Toe'
 
 CLOCK = pygame.time.Clock()
-FPS = 60
+FPS = 120
 
 
 class Colors:
