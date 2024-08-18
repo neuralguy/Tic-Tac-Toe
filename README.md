@@ -1,4 +1,4 @@
-# Игра Tic Tac Toe, написаная на pygame
+# Игра Tic Tac Toe, написаная(это не опечатка) на pygame
 
 ## Usage:
 1. Open terminal
