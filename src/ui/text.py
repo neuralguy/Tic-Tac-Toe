@@ -23,7 +23,8 @@ class Text:
         x: int,
         y: int,
         text: str,
-        text_color: tuple[int,int,int]|list[int,int,int]|str="white",
+        name: str="",
+        text_color: tuple[int,int,int]|list[int,int,int]|str=(156,157,158),
         text_alpha: int=1,
         font_size: int=16,
         font_path: str="freesansbold.ttf",
@@ -52,7 +53,7 @@ class Text:
         self.__height = self.__render.get_height()
         self.__x = x - self.__width // 2
         self.__y = y - self.__height // 2
-        self.__rect = self.__render.get_rect()
+        self.__rect = pygame.Rect((self.__x, self.__y), (self.__width, self.__height))
 
         self.__antialias = antialias
 
@@ -139,15 +140,5 @@ class Text:
         """
         return self.__height
 
-    def is_collide(self, x:int, y:int) -> bool:
-        """
-        Проверяет, находится ли точка в области текста.
-
-        Args:
-          x (int): Координата x точки.
-          y (int): Координата y точки.
-
-        Returns:
-          bool: True, если точка находится в области текста, иначе False.
-        """
-        return self.__rect.collidepoint(x, y)
+    def get_rect(self) -> pygame.rect.Rect:
+        return self.__rect

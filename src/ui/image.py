@@ -6,6 +6,7 @@ class Image:
             x: int, 
             y: int, 
             path: str, 
+            name: str="",
             alpha: int=255):
         self.__x = x
         self.__y = y
@@ -67,3 +68,6 @@ class Image:
 
     def get_pos(self) -> list[int,int]:
         return [self.__x, self.__y]
+
+    def get_image(self) -> pygame.surface.Surface:
+        return self.__image

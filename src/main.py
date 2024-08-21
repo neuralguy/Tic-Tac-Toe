@@ -1,21 +1,24 @@
 import pygame
-from menu import Menu
 from cell import Cell
 from board import Board
 from config import *
+from ui.manager import Manager
+from create_ui import create_menu
 
 
 class Game:
     def __init__(self):
         pygame.init()
         pygame.display.set_caption(GAME_TITLE)
+        self.screen = pygame.display.set_mode((WIDTH, HEIGHT))
 
         self.board = Board()
-        self.menu = Menu()
         self.player = 0
 
+        self.manager = Manager()
+
     def game_loop(self):
-        self.draw()
+        self.draw_game()
         while True:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -26,21 +29,22 @@ class Game:
             CLOCK.tick(FPS)
 
     def menu_loop(self):
-        self.menu.create_menu()
+        create_menu(self.manager)
         while True:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     exit()
-                if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
-                    pass
 
-            self.menu.draw(SCREEN)
+                self.manager.handle_event(event)
+
+
+            self.manager.draw(self.screen)
             pygame.display.update()
             CLOCK.tick(FPS)
 
-    def draw(self):
-        SCREEN.fill(Colors.black)
-        self.board.draw(SCREEN)
+    def draw_game(self):
+        self.screen.fill(Colors.black)
+        self.board.draw(self.screen)
         pygame.display.update()
 
     def click(self, pos):
@@ -53,7 +57,7 @@ class Game:
             cell.set_state(self.player)
             self.player = not self.player
 
-            self.draw()
+            self.draw_game()
 
             if self.board.check_win(row, col):
                 self.game_over()
@@ -61,7 +65,7 @@ class Game:
     def game_over(self):
         self.player = 0
         self.board.reset_cells()
-        self.draw()
+        self.draw_game()
 
 
 if __name__ == '__main__':
