@@ -18,18 +18,21 @@ class Game:
         self.manager = Manager()
 
     def game_loop(self):
-        self.draw_game()
         while True:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     exit()
                 if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                     self.click(event.pos)
+                if event.type == pygame.KEYDOWN and event.key == pygame.K_r:
+                    self.board.reset_cells()
 
+            self.draw_game()
             CLOCK.tick(FPS)
 
     def menu_loop(self):
         create_menu(self.manager)
+        self.manager.get_widget("play").set_callback(self.game_loop)
         while True:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -55,17 +58,16 @@ class Game:
 
         if cell.get_state() is None:
             cell.set_state(self.player)
-            self.player = not self.player
 
-            self.draw_game()
-
-            if self.board.check_win(row, col):
+            if self.board.check_win(row, col, self.player):
                 self.game_over()
+
+            self.player = not self.player
 
     def game_over(self):
         self.player = 0
-        self.board.reset_cells()
-        self.draw_game()
+        # self.board.reset_cells()
+        print("game_over")
 
 
 if __name__ == '__main__':

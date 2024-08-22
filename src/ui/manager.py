@@ -17,11 +17,14 @@ class Manager:
 			for widget in self.__widgets:
 				if isinstance(widget, Button) and widget.is_collide(event.pos):
 					widget.activate()
-					widget.press()
+					break
 		if event.type == pygame.MOUSEBUTTONUP and event.button == 1:
 			for widget in self.__widgets:
-				if isinstance(widget, Button):
+				if isinstance(widget, Button) and widget.is_active():
 					widget.deactivate()
+
+					if widget.is_collide(event.pos):
+						widget.press()
 
 	def add(self, widget:Text|Button|Image) -> None:
 		self.__widgets.append(widget)

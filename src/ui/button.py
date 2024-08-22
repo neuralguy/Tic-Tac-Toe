@@ -73,6 +73,7 @@ class Button(Text):
 
         self.__callback = callback
         self.__args = args
+        self.__name = name
 
         self.__enabled = enabled
         self.__activated = activated
@@ -110,9 +111,11 @@ class Button(Text):
           surface (pygame.surface.Surface): Поверхность, на которой будет отрисована кнопка.
         """
         surface.blit(self.__background_surface, (self.__x, self.__y))
-        surface.blit(self.get_render(), (self.__x + self.__width // 2 - self.get_width() // 2, self.__y + self.__height // 2 - self.get_height() // 2))
+        surface.blit(
+            surface=self.get_render(), 
+            dest=(self.__x + self.__width // 2 - super().get_width() // 2, self.__y + self.__height // 2 - super().get_height() // 2))
 
-    def update_background(self):
+    def update_background(self) -> None:
         """
         Обновляет фон кнопки.
         """
@@ -148,7 +151,6 @@ class Button(Text):
         self.__activated = False
         self.__background_surface.fill(self.__background_color_inactive)
 
-
     def get_callback(self) -> callable:
         """
         Возвращает исполняемую функцию.
@@ -160,6 +162,9 @@ class Button(Text):
 
     def get_rect(self) -> pygame.rect.Rect:
         return self.__rect
+
+    def get_name(self) -> str:
+        return self.__name
 
     def is_collide(self, pos:list[int,int]) -> bool:
             """

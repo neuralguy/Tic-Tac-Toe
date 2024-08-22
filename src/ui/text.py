@@ -45,6 +45,7 @@ class Text:
         self.__text = text
         self.__text_color = text_color
         self.__text_alpha = text_alpha
+        self.__name = name
 
         self.__font = pygame.font.Font(font_path, font_size)
         self.__render = self.__font.render(text, antialias, text_color).convert_alpha()
@@ -142,3 +143,6 @@ class Text:
 
     def get_rect(self) -> pygame.rect.Rect:
         return self.__rect
+
+    def get_name(self) -> str:
+        return self.__name

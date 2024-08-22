@@ -11,6 +11,7 @@ class Image:
         self.__x = x
         self.__y = y
         self.__path = path
+        self.__name = name
         self.__alpha = alpha
         self.__image = None
         self.load(path)
@@ -71,3 +72,6 @@ class Image:
 
     def get_image(self) -> pygame.surface.Surface:
         return self.__image
+
+    def get_name(self) -> str:
+        return self.__name
